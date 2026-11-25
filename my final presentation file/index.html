@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     Entrepreneur Hub - a working one-page app.
+     The HTML, CSS and JavaScript are kept in separate files.
+     Click a feature card to open it and use the real activity inside.
+     Main colours: purple (#6d28d9) and gold (#f5b014).
+     Your progress is saved on your device with localStorage.
+     ============================================================ -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrepreneur Hub</title>
+
+
+  <!-- Link to the separate stylesheet (the look) -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Link to the separate JavaScript (the brain). defer = run after the page has loaded -->
+  <script src="styles.js" defer></script>
+</head>
+
+<body>
+
+  <!-- ======================= LEFT SIDEBAR (app navigation) ======================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="side-brand">
+      <span class="logo-mark"></span>
+      <span class="logo-name">Entrepreneur<span class="logo-accent">Hub</span></span>
+    </div>
+
+    <div class="side-group">Menu</div>
+    <button class="side-link" onclick="goToSection('home')"><span class="side-ico" data-icon="home"></span> Home</button>
+    <button class="side-link" onclick="goToSection('about')"><span class="side-ico" data-icon="book"></span> About</button>
+    <button class="side-link" onclick="goToSection('features')"><span class="side-ico" data-icon="grid"></span> Features</button>
+    <button class="side-link" onclick="goToSection('steps')"><span class="side-ico" data-icon="target"></span> How it works</button>
+    <button class="side-link" onclick="goToSection('contact')"><span class="side-ico" data-icon="mail"></span> Contact</button>
+
+    <div class="side-group">Features</div>
+    <button class="side-link" onclick="pickFeature('discipline')"><span class="side-ico" data-icon="flame"></span> Discipline</button>
+    <button class="side-link" onclick="pickFeature('ceo')"><span class="side-ico" data-icon="target"></span> CEO Mode</button>
+    <button class="side-link" onclick="pickFeature('skills')"><span class="side-ico" data-icon="briefcase"></span> Business Skills</button>
+    <button class="side-link" onclick="pickFeature('money')"><span class="side-ico" data-icon="wallet"></span> Money Habits</button>
+    <button class="side-link" onclick="pickFeature('sales')"><span class="side-ico" data-icon="trending"></span> Sales Tracker</button>
+    <button class="side-link" onclick="pickFeature('badges')"><span class="side-ico" data-icon="trophy"></span> Badges</button>
+  </aside>
+
+  <!-- The dark area behind the sidebar on phones (tap it to close) -->
+  <div class="side-backdrop" id="sideBackdrop" onclick="closeSidebar()"></div>
+
+  <!-- APP SHELL: holds the header, page content and footer; shifts right of the sidebar -->
+  <div class="app-shell">
+
+  <!-- ======================= HEADER ======================= -->
+  <header class="header">
+    <div class="container header-inner">
+      <button class="hamburger" onclick="toggleSidebar()" aria-label="Open menu"><span data-icon="menu"></span></button>
+      <a href="#home" class="logo" onclick="goToSection('home');return false;">
+        <span class="logo-mark"></span>
+        <span class="logo-name">Entrepreneur<span class="logo-accent">Hub</span></span>
+      </a>
+      <nav class="menu">
+        <a href="#home" onclick="goToSection('home');return false;">Home</a>
+        <a href="#about" onclick="goToSection('about');return false;">About</a>
+        <a href="#features" onclick="goToSection('features');return false;">Features</a>
+        <a href="#steps" onclick="goToSection('steps');return false;">How it works</a>
+        <a href="#contact" onclick="goToSection('contact');return false;">Contact</a>
+      </nav>
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
+    </div>
+  </header>
+
+  <!-- Everything inside #landing is the home page (hidden when a feature page is open) -->
+  <div id="landing">
+
+  <main>
+  <!-- ======================= HERO ======================= -->
+  <section id="home" class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="badge-pill"><span class="ico" data-icon="rocket"></span> For young founders</span>
+        <h1>Build your business.<br><span class="hero-highlight">Build your discipline.</span></h1>
+        <p>Entrepreneur Hub helps young people get ready for the business world — discipline, business skills and smart money habits, all in one place. Get 1% better every day.</p>
+        <div class="hero-buttons">
+          <a href="#features" class="btn btn-gold">Open the app</a>
+          <a href="#about" class="btn btn-outline">Learn more</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="hero-card-body">
+          <p class="hero-card-label">Today's streak</p>
+          <p class="hero-card-big" id="heroStreak">0 days</p>
+          <div class="hero-card-row"><span>Daily challenge</span><span class="tick" data-icon="check"></span></div>
+          <div class="hero-card-row"><span>Top 3 priorities</span><span class="tick" data-icon="check"></span></div>
+          <div class="hero-card-row"><span>Save KSh 100</span><span class="tick" data-icon="check"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= STATS ======================= -->
+  <section class="stats">
+    <div class="container stats-inner">
+      <div class="stat reveal"><p class="stat-number">6</p><p class="stat-label">Working tools</p></div>
+      <div class="stat reveal"><p class="stat-number">6</p><p class="stat-label">Badges to earn</p></div>
+      <div class="stat reveal"><p class="stat-number">1%</p><p class="stat-label">Better every day</p></div>
+      <div class="stat reveal"><p class="stat-number">100%</p><p class="stat-label">Made in Kenya</p></div>
+    </div>
+  </section>
+
+  <!-- ======================= ABOUT ======================= -->
+  <section id="about" class="about">
+    <div class="container">
+      <span class="section-tag reveal">About</span>
+      <h2 class="reveal">One app to grow the founder in you</h2>
+      <p class="reveal">
+        Entrepreneur Hub brings discipline, business skills and smart money habits together
+        in one place. Click any feature below to open it and start the activity — your
+        progress is saved on your device.
+      </p>
+    </div>
+  </section>
+
+  <!-- ======================= FEATURES (clickable) ======================= -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag reveal">Features</span>
+        <h2 class="reveal">Tap a feature to use it</h2>
+        <p class="section-sub reveal">Each one opens a real, working activity.</p>
+      </div>
+
+      <div class="feature-grid">
+        <!-- Each card calls openFeature('key') when clicked -->
+        <article class="feature-card reveal" role="button" tabindex="0" data-feature-key="discipline" onclick="openFeature('discipline')">
+          <span class="feature-icon" data-icon="flame"></span>
+          <h3>Discipline</h3>
+          <p>Mark your habit done each day and grow your streak.</p>
+          <span class="feature-open">Open <span class="ico" data-icon="arrowRight"></span></span>
+        </article>
+
+        <article class="feature-card reveal" role="button" tabindex="0" data-feature-key="ceo" onclick="openFeature('ceo')">
+          <span class="feature-icon" data-icon="target"></span>
+          <h3>CEO Mode</h3>
+          <p>Set your top 3 priorities and track your CEO score.</p>
+          <span class="feature-open">Open <span class="ico" data-icon="arrowRight"></span></span>
+        </article>
+
+        <article class="feature-card reveal" role="button" tabindex="0" data-feature-key="skills" onclick="openFeature('skills')">
+          <span class="feature-icon" data-icon="briefcase"></span>
+          <h3>Business Skills</h3>
+          <p>Tick off key founder skills as you learn them.</p>
+          <span class="feature-open">Open <span class="ico" data-icon="arrowRight"></span></span>
+        </article>
+
+        <article class="feature-card reveal" role="button" tabindex="0" data-feature-key="money" onclick="openFeature('money')">
+          <span class="feature-icon" data-icon="wallet"></span>
+          <h3>Money Habits</h3>
+          <p>Add your savings and watch your goal fill up.</p>
+          <span class="feature-open">Open <span class="ico" data-icon="arrowRight"></span></span>
+        </article>
+
+        <article class="feature-card reveal" role="button" tabindex="0" data-feature-key="sales" onclick="openFeature('sales')">
+          <span class="feature-icon" data-icon="trending"></span>
+          <h3>Sales Tracker</h3>
+          <p>Record every sale you make and watch your total grow.</p>
+          <span class="feature-open">Open <span class="ico" data-icon="arrowRight"></span></span>
+        </article>
+
+        <article class="feature-card reveal" role="button" tabindex="0" data-feature-key="badges" onclick="openFeature('badges')">
+          <span class="feature-icon" data-icon="trophy"></span>
+          <h3>Badges</h3>
+          <p>See which badges you've unlocked as you grow.</p>
+          <span class="feature-open">Open <span class="ico" data-icon="arrowRight"></span></span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= STEPS ======================= -->
+  <section id="steps" class="steps">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-tag reveal">How it works</span>
+        <h2 class="reveal">Start in three simple steps</h2>
+      </div>
+      <div class="step-grid">
+        <div class="step-card reveal"><span class="step-number">1</span><h3>Set your goal</h3><p>Pick the habit or skill to build this week.</p></div>
+        <div class="step-card reveal"><span class="step-number">2</span><h3>Show up daily</h3><p>Do one small thing each day and keep your streak.</p></div>
+        <div class="step-card reveal"><span class="step-number">3</span><h3>Grow 1% better</h3><p>Small wins add up into real skills and confidence.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= QUOTE (with a "new quote" button) ======================= -->
+  <section class="quote">
+    <div class="container">
+      <blockquote id="quoteText">"Discipline is the bridge between goals and accomplishment."</blockquote>
+      <p class="quote-author" id="quoteAuthor">— Jim Rohn</p>
+      <button class="btn btn-gold" onclick="newQuote()" style="margin-top:18px;">New quote</button>
+    </div>
+  </section>
+
+  <!-- ======================= CTA ======================= -->
+  <section class="cta">
+    <div class="container">
+      <h2 class="reveal">Ready to build your future?</h2>
+      <p class="reveal">Open the app and start getting 1% better every day.</p>
+      <a href="#features" class="btn btn-gold">Open the app</a>
+    </div>
+  </section>
+
+  <!-- ======================= CONTACT ======================= -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <span class="section-tag reveal">Contact</span>
+      <h2 class="reveal">Let's talk</h2>
+      <p class="reveal">Want to join or learn more? Reach out any time.</p>
+      <p class="contact-email reveal"><a href="mailto:Raymond.wachiya@student.moringaschool.com">Raymond.wachiya@student.moringaschool.com</a></p>
+    </div>
+  </section>
+
+  </main>
+  <!-- ======================= FOOTER ======================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-name">Entrepreneur<span class="logo-accent">Hub</span></span>
+        <p>Build your business. Build your discipline.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#steps">How it works</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Entrepreneur Hub · Made by Raymond · Moringa Future Builders.</p></div>
+  </footer>
+
+  </div><!-- end #landing -->
+
+  <!-- ======================= FEATURE PAGE: one feature on its own ======================= -->
+  <main id="featurePage" class="feature-page" style="display:none;">
+    <div class="container">
+      <button class="btn-back" onclick="goBack()"><span class="ico" data-icon="arrowLeft"></span> Back to home</button>
+      <h1 class="feature-title" id="featureTitle" tabindex="-1">Feature</h1>
+      <p class="feature-sub" id="featureSub"></p>
+
+      <!-- Panel: Discipline (several activities) -->
+      <div class="panel" id="panel-discipline">
+        <p class="panel-intro">Build the habits that make a founder. Work through the activities below — your progress saves automatically.</p>
+
+        <!-- Activity 1: streak + 1% better -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="flame"></span> Daily streak &amp; 1% better</h4>
+          <p class="sub">Show up today, then log one small thing you did to get 1% better.</p>
+          <p class="big-number" id="streakNum">0 days</p>
+          <p class="hero-card-label">Best streak: <span id="bestStreak">0</span> day(s)</p>
+          <button class="btn btn-purple" onclick="markDay()" style="margin:10px 0;">I did it today</button>
+          <p class="msg" id="streakMsg"></p>
+          <div class="row">
+            <input class="field" id="onePctInput" aria-label="My 1% improvement today" placeholder="My 1% today: e.g. read 5 pages" maxlength="80">
+            <button class="btn btn-purple" onclick="addOnePct()">Log</button>
+          </div>
+          <div id="onePctList"></div>
+        </div>
+
+        <!-- Activity 2: habits -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="check"></span> My habits</h4>
+          <p class="sub">Add your habits and tick them each day.</p>
+          <div class="row">
+            <input class="field" id="habitInput" aria-label="Habit" placeholder="Add a habit" maxlength="40">
+            <button class="btn btn-purple" onclick="addHabit()">Add</button>
+          </div>
+          <div id="habitList"></div>
+        </div>
+
+        <!-- Activity 3: goal -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="target"></span> My goal</h4>
+          <p class="sub">Set one goal and add progress toward it.</p>
+          <div class="row">
+            <input class="field" id="goalText" aria-label="Goal name" placeholder="Goal (e.g. sell 20 cakes)" maxlength="40">
+            <input class="field" id="goalTarget" aria-label="Goal target" type="number" placeholder="Target" min="1" style="max-width:120px;">
+          </div>
+          <button class="btn btn-purple" onclick="setGoal()" style="margin:8px 0;">Set goal</button>
+          <div id="goalBox"></div>
+        </div>
+
+        <!-- Activity 4: daily challenge -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="zap"></span> Daily challenge</h4>
+          <p class="sub">A new small challenge every day.</p>
+          <p id="challengeText" style="font-weight:600;"></p>
+          <button class="btn btn-gold" onclick="doChallenge()">Mark done</button>
+          <p class="msg" id="challengeMsg"></p>
+        </div>
+      </div>
+
+      <!-- Panel: CEO Mode (several activities) -->
+      <div class="panel" id="panel-ceo">
+        <p class="panel-intro">Run your day like a company — set priorities and track what's due.</p>
+
+        <!-- Activity 1: priorities + score -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="target"></span> Top 3 priorities</h4>
+          <p class="sub">Write up to 3, then tick them off. Your CEO score updates live.</p>
+          <div class="row">
+            <input class="field" id="prioInput" aria-label="Priority" placeholder="Add a priority (max 3)" maxlength="60">
+            <button class="btn btn-purple" onclick="addPriority()">Add</button>
+          </div>
+          <div id="prioList"></div>
+          <p class="hero-card-label" style="margin-top:12px;">CEO score today</p>
+          <p class="big-number" id="ceoScore">0%</p>
+        </div>
+
+        <!-- Activity 2: deadlines -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="clock"></span> Deadlines</h4>
+          <p class="sub">Add the things that are due and when.</p>
+          <div class="row">
+            <input class="field" id="dlText" aria-label="Deadline task" placeholder="What is due" maxlength="40">
+            <input class="field" id="dlDate" aria-label="Deadline date" type="date" style="max-width:170px;">
+          </div>
+          <button class="btn btn-purple" onclick="addDeadline()" style="margin:8px 0;">Add deadline</button>
+          <div id="dlList"></div>
+        </div>
+      </div>
+
+      <!-- Panel: Business Skills (several activities) -->
+      <div class="panel" id="panel-skills">
+        <p class="panel-intro">Learn the core skills, and spark fresh business ideas.</p>
+
+        <!-- Activity 1: skills checklist -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="briefcase"></span> Skills checklist</h4>
+          <p class="sub">Tick each skill as you learn it and fill the bar to 100%.</p>
+          <div id="skillList"></div>
+          <div class="bar"><div class="bar-fill" id="skillBar"></div></div>
+          <p class="msg" id="skillMsg"></p>
+        </div>
+
+        <!-- Activity 2: idea generator -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="bulb"></span> Idea generator</h4>
+          <p class="sub">Stuck for a business idea? Get one here.</p>
+          <p id="ideaText" style="font-weight:600;">Click the button for an idea.</p>
+          <button class="btn btn-gold" onclick="newIdea()">Give me an idea</button>
+        </div>
+      </div>
+
+      <!-- Panel: Money (several activities) -->
+      <div class="panel" id="panel-money">
+        <p class="panel-intro">Grow good money habits and understand your numbers.</p>
+
+        <!-- Activity 1: savings goal -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="wallet"></span> Savings goal</h4>
+          <p class="sub">Add what you save toward the KSh 1,000 goal.</p>
+          <div class="row">
+            <input class="field" id="saveInput" aria-label="Amount saved in Kenyan shillings" type="number" placeholder="Amount saved (KSh)" min="1">
+            <button class="btn btn-purple" onclick="addSaving()">Add</button>
+          </div>
+          <p class="big-number" id="saveTotal">KSh 0</p>
+          <div class="bar"><div class="bar-fill" id="saveBar"></div></div>
+          <p class="msg" id="saveMsg"></p>
+        </div>
+
+        <!-- Activity 2: profit calculator -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="calc"></span> Profit calculator</h4>
+          <p class="sub">See your profit and margin on one item.</p>
+          <div class="row">
+            <input class="field" id="costInput" aria-label="Cost in Kenyan shillings" type="number" placeholder="Cost (KSh)" min="0">
+            <input class="field" id="priceInput" aria-label="Selling price in Kenyan shillings" type="number" placeholder="Selling price (KSh)" min="0">
+          </div>
+          <button class="btn btn-purple" onclick="calcProfit()" style="margin:8px 0;">Calculate</button>
+          <p id="profitText" style="font-weight:700;"></p>
+        </div>
+      </div>
+
+      <!-- Panel: Sales Tracker -->
+      <div class="panel" id="panel-sales">
+        <p class="panel-intro">Running a hustle? Record every sale you make and watch your money grow.</p>
+
+        <!-- Activity: record a sale -->
+        <div class="activity">
+          <h4><span class="ico" data-icon="dollar"></span> Record a sale</h4>
+          <p class="sub">Add what you sold and for how much.</p>
+          <div class="row">
+            <input class="field" id="saleItem" aria-label="Item sold" placeholder="What you sold" maxlength="40">
+            <input class="field" id="saleAmount" aria-label="Sale amount in Kenyan shillings" type="number" placeholder="KSh" min="1" style="max-width:120px;">
+          </div>
+          <button class="btn btn-purple" onclick="recordSale()" style="margin:8px 0;">Record sale</button>
+          <p class="hero-card-label">Total sales made: <span id="saleCount">0</span></p>
+          <p class="big-number" id="saleTotal">KSh 0</p>
+          <div id="saleList"></div>
+        </div>
+      </div>
+
+      <!-- Panel: Badges -->
+      <div class="panel" id="panel-badges">
+        <p class="panel-intro">Badges reward your consistency. Keep using the other features and you'll unlock all six.</p>
+        <div class="activity">
+          <h4><span class="ico" data-icon="trophy"></span> Your badges</h4>
+          <p class="sub" id="badgeCount">0 of 6 unlocked</p>
+          <div class="badge-grid" id="badgeGrid"></div>
+        </div>
+      </div>
+
+    </div><!-- .container -->
+  </main><!-- #featurePage -->
+
+  </div><!-- end app-shell -->
+
+  <div id="storageNotice" class="storage-notice" role="alert" hidden></div>
+
+</body>
+</html>

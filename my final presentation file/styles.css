@@ -1,0 +1,447 @@
+/* Entrepreneur Hub - styles. Linked from index.html with: <link rel="stylesheet" href="styles.css"> */
+
+    /* ---------- Colour variables used across the whole page ---------- */
+    :root {
+      --purple: #1e40af;       /* deep navy blue - the main brand colour */
+      --purple-dark: #172554;  /* very deep navy for gradients and hover */
+      --purple-soft: #dbeafe;  /* light blue for soft backgrounds */
+      --gold: #f5b014;
+      --gold-dark: #d99a06;
+      --ink: #1e1b2e;
+      --grey: #6b7280;
+      --white: #ffffff;
+      --green: #16a34a;
+    }
+
+    /* Make width include padding, for easier layouts */
+    * { box-sizing: border-box; }
+
+    /* The whole page font and base colours */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, Arial, sans-serif;
+      color: var(--ink);
+      background-color: var(--white);
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    /* A centred container that keeps content a readable width */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* Headings share tight spacing */
+    h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 12px; }
+
+    /* Links have no underline by default */
+    a { text-decoration: none; color: inherit; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-block; padding: 14px 28px; border: none; border-radius: 10px;
+      font-weight: 700; font-size: 17px; cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold { background-color: var(--gold); color: var(--ink); }
+    .btn-gold:hover { background-color: var(--gold-dark); }
+    .btn-purple { background-color: var(--purple); color: var(--white); }
+    .btn-purple:hover { background-color: var(--purple-dark); }
+    .btn-outline {
+      background-color: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+    .btn-outline:hover { border-color: var(--white); }
+    .btn-small { padding: 10px 20px; font-size: 16px; }
+
+    /* ---------- Left sidebar (app navigation) ---------- */
+    /* The sidebar is fixed to the left. It slides off-screen on phones. */
+    .sidebar {
+      position: fixed; top: 0; left: 0; width: 240px; height: 100%;
+      background: linear-gradient(180deg, var(--purple-dark), var(--purple));
+      color: var(--white); padding: 22px 16px; z-index: 60; overflow-y: auto;
+      transform: translateX(-100%);                 /* hidden to the left by default */
+      transition: transform 0.25s ease;             /* smooth slide */
+    }
+    .sidebar.open { transform: translateX(0); }     /* slide in when opened */
+    .side-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .sidebar .logo-name { color: #ffffff; }
+    .sidebar .logo-accent { color: var(--gold); }
+    /* Small grey group label, like "Features" */
+    .side-group {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(255,255,255,0.75); margin: 18px 8px 8px;
+    }
+    /* Each sidebar link/button */
+    .side-link {
+      display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+      background: transparent; border: none; color: rgba(255,255,255,0.96);
+      font-family: inherit; font-size: 16px; font-weight: 600;
+      padding: 11px 12px; border-radius: 10px; cursor: pointer; transition: background 0.15s ease;
+    }
+    .side-link:hover { background: rgba(255,255,255,0.18); color: #ffffff; }
+    .side-ico { width: 22px; display: inline-flex; align-items: center; justify-content: center; }
+    .side-ico svg { width: 20px; height: 20px; }
+    /* The menu icon that opens the sidebar on phones */
+    .hamburger {
+      background: var(--purple-soft); border: none; color: var(--purple);
+      font-size: 22px; width: 42px; height: 42px; border-radius: 10px; cursor: pointer; margin-right: 10px;
+    }
+    /* The light / dark mode toggle button */
+    .theme-btn {
+      background: var(--purple-soft); border: none; color: var(--purple);
+      font-size: 18px; width: 42px; height: 42px; border-radius: 10px; cursor: pointer; margin-left: 10px;
+    }
+    .theme-btn:hover { background: var(--purple); color: #ffffff; }
+    .theme-btn svg { width: 18px; height: 18px; }
+    /* A dark backdrop behind the sidebar on phones */
+    .side-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: none; z-index: 55; }
+    .side-backdrop.open { display: block; }
+
+    /* ---------- Header ---------- */
+    .header {
+      position: sticky; top: 0; background-color: var(--white);
+      border-bottom: 1px solid #eee; z-index: 20;
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between; height: 72px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .logo-mark { width: 16px; height: 16px; background-color: var(--gold); transform: rotate(45deg); }
+    .logo-name { font-size: 21px; font-weight: 800; color: var(--ink); }
+    .logo-accent { color: var(--purple); }
+    .menu a { margin: 0 14px; font-size: 16px; font-weight: 600; color: var(--ink); transition: color 0.15s ease; }
+    .menu a:hover { color: var(--purple); }
+    .hamburger svg { width: 20px; height: 20px; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+      color: var(--white); padding: 80px 0; overflow: hidden;
+    }
+    .hero-inner { display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+    .hero-text { flex: 1; min-width: 300px; }
+    .badge-pill {
+      display: inline-block; background-color: rgba(255,255,255,0.15);
+      padding: 6px 14px; border-radius: 999px; font-size: 15px; margin-bottom: 18px;
+    }
+    .hero-text h1 { font-size: 50px; font-weight: 800; }
+    .hero-highlight { color: var(--gold); }
+    .hero-text p { font-size: 18px; color: rgba(255,255,255,0.9); max-width: 480px; margin: 0 0 28px; }
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* The little app preview card on the right (animated floating) */
+    .hero-card {
+      flex: 1; min-width: 280px; background-color: var(--white); color: var(--ink);
+      border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); overflow: hidden;
+      animation: float 4s ease-in-out infinite;
+    }
+    /* A gentle up-and-down floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .hero-card-top { background-color: var(--purple-soft); padding: 12px 16px; }
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: var(--purple); margin-right: 6px; }
+    .hero-card-body { padding: 22px; }
+    .hero-card-label { color: var(--grey); margin: 0; font-size: 14px; }
+    .hero-card-big { font-size: 30px; font-weight: 800; color: var(--purple); margin: 4px 0 18px; }
+    .hero-card-row { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #eee; }
+    .tick { color: var(--green); font-weight: 700; }
+
+    /* ---------- Stats ---------- */
+    .stats { background-color: var(--purple-soft); padding: 40px 0; }
+    .stats-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; text-align: center; }
+    .stat { flex: 1; min-width: 140px; }
+    .stat-number { font-size: 38px; font-weight: 800; color: var(--purple); margin: 0; }
+    .stat-label { color: var(--grey); margin: 4px 0 0; }
+
+    /* ---------- Shared section bits ---------- */
+    .section-tag {
+      display: inline-block; color: var(--purple); background-color: var(--purple-soft);
+      padding: 5px 14px; border-radius: 999px; font-size: 15px; font-weight: 700; margin-bottom: 14px;
+    }
+    .section-head { text-align: center; max-width: 620px; margin: 0 auto 46px; }
+    .section-sub { color: var(--grey); font-size: 17px; }
+    h2 { font-size: 34px; }
+
+    /* ---------- About ---------- */
+    .about { padding: 80px 0; text-align: center; }
+    .about p { max-width: 640px; margin: 0 auto; color: var(--grey); font-size: 18px; }
+
+    /* ---------- Features ---------- */
+    .features { padding: 80px 0; background-color: #faf9fe; }
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;
+    }
+    /* Each feature card is a button you can click */
+    .feature-card {
+      background-color: var(--white); border: 1px solid #eee; border-radius: 14px;
+      padding: 30px; cursor: pointer; text-align: left;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .feature-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(109,40,217,0.14); }
+    .feature-icon {
+      display: inline-grid; place-items: center; width: 54px; height: 54px;
+      border-radius: 14px; background-color: var(--purple-soft); color: var(--purple); margin-bottom: 16px;
+    }
+    .feature-icon svg { width: 27px; height: 27px; }
+    .feature-card h3 { font-size: 22px; color: var(--ink); }
+    .feature-card p { color: var(--grey); margin: 0 0 12px; }
+    .feature-open { color: var(--purple); font-weight: 700; font-size: 17px; }
+
+    /* ---------- Steps ---------- */
+    .steps { padding: 80px 0; }
+    .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .step-card {
+      background-color: var(--white); border-radius: 14px; padding: 30px;
+      border-top: 4px solid var(--gold); box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+    }
+    .step-number {
+      display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+      background-color: var(--purple); color: var(--white); font-weight: 800; margin-bottom: 14px;
+    }
+    .step-card p { color: var(--grey); margin: 0; }
+
+    /* ---------- Quote ---------- */
+    .quote {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      color: var(--white); padding: 70px 0; text-align: center;
+    }
+    .quote blockquote { font-size: 26px; font-style: italic; max-width: 720px; margin: 0 auto 10px; font-weight: 600; }
+    .quote-author { color: var(--gold); font-weight: 700; margin: 0; }
+
+    /* ---------- CTA ---------- */
+    .cta { padding: 80px 0; text-align: center; }
+    .cta p { color: var(--grey); font-size: 18px; max-width: 460px; margin: 0 auto 26px; }
+
+    /* ---------- Contact ---------- */
+    .contact { background-color: var(--purple-soft); padding: 80px 0; text-align: center; }
+    .contact-email a { color: var(--purple); font-size: 22px; font-weight: 800; overflow-wrap: anywhere; }
+    .contact-email a:hover { color: var(--purple-dark); }
+
+    /* ---------- Footer ---------- */
+    .footer { background-color: var(--ink); color: var(--white); padding-top: 50px; }
+    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; padding-bottom: 40px; }
+    .footer-brand p { color: rgba(255,255,255,0.6); max-width: 260px; margin: 10px 0 0; }
+    .footer-links h4 { color: var(--gold); margin-bottom: 12px; }
+    .footer-links a { display: block; color: rgba(255,255,255,0.75); padding: 4px 0; transition: color 0.15s ease; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.15); text-align: center; padding: 20px;
+      font-size: 14px; color: rgba(255,255,255,0.6);
+    }
+
+    /* ============================================================
+       MODAL: the pop-up window that shows a feature's activities
+       ============================================================ */
+    /* The dark background behind the pop-up (hidden until opened) */
+    .overlay {
+      position: fixed; inset: 0; background-color: rgba(30,27,46,0.6);
+      display: none; align-items: flex-start; justify-content: center;
+      padding: 40px 16px; overflow-y: auto; z-index: 50;
+    }
+    /* When we add the 'open' class, show the overlay */
+    .overlay.open { display: flex; }
+    /* The white pop-up box */
+    .modal {
+      background-color: var(--white); border-radius: 18px; max-width: 680px; width: 100%;
+      padding: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+      animation: pop 0.25s ease;   /* a small pop-in animation */
+    }
+    /* The pop-in animation: start small and see-through, end full size */
+    @keyframes pop {
+      from { transform: scale(0.9); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .modal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .modal-head h3 { font-size: 24px; margin: 0; }
+    /* The X close button */
+    .modal-close {
+      background: var(--purple-soft); color: var(--purple); border: none; cursor: pointer;
+      width: 38px; height: 38px; border-radius: 50%; font-size: 20px; font-weight: 700; line-height: 1;
+    }
+    .modal-close:hover { background: var(--purple); color: var(--white); }
+    .modal-sub { color: var(--grey); margin: 0 0 20px; }
+    /* A short context paragraph at the top of each activity */
+    .panel-intro { color: var(--grey); margin: 0 0 18px; font-size: 16.5px; line-height: 1.6; }
+    /* Each sub-activity inside a feature is its own little card */
+    .activity { border: 1px solid #eee; border-radius: 12px; padding: 18px; margin-bottom: 16px; }
+    .activity h4 { margin: 0 0 4px; font-size: 19px; color: var(--purple); display: flex; align-items: center; gap: 8px; }
+    .activity h4 svg { width: 19px; height: 19px; flex: none; }
+    .activity .sub { color: var(--grey); font-size: 16px; margin: 0 0 12px; }
+    .item-text { font-size: 16.5px; }
+    /* Inline SVG icons inherit the surrounding text colour */
+    .ico { display: inline-flex; }
+    .ico svg { width: 1em; height: 1em; }
+    .badge-pill svg { width: 14px; height: 14px; }
+    .badge-pill { display: inline-flex; align-items: center; gap: 7px; }
+    .tick svg { width: 18px; height: 18px; }
+    .item button svg { width: 15px; height: 15px; vertical-align: middle; }
+
+    /* ---------- Feature page: shows ONE feature on its own ---------- */
+    .feature-page { padding: 40px 0 70px; min-height: 72vh; }
+    .btn-back {
+      background: var(--purple-soft); color: var(--purple); border: none; cursor: pointer;
+      font-weight: 700; font-family: inherit; font-size: 16px;
+      padding: 10px 18px; border-radius: 10px; margin-bottom: 20px;
+    }
+    .btn-back:hover { background: var(--purple); color: var(--white); }
+    .feature-title { font-size: 34px; color: var(--ink); margin: 0 0 6px; }
+    .feature-sub { color: var(--grey); margin: 0 0 26px; }
+    .feature-page .panel { max-width: 640px; }   /* keep the activities a readable width */
+
+    /* Each activity panel is hidden until its feature is opened */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* Big number shown in some activities (like the streak) */
+    .big-number { font-size: 44px; font-weight: 800; color: var(--purple); margin: 0; }
+    /* A little pulse animation when a number changes */
+    .pulse { animation: pulse 0.4s ease; }
+    @keyframes pulse {
+      0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); }
+    }
+
+    /* A row with a checkbox-style item */
+    .item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px;
+    }
+    .item.done { background-color: #f0fdf4; border-color: #bbf7d0; }
+    .item.done span.item-text { text-decoration: line-through; color: var(--grey); }
+    .item button {
+      border: none; cursor: pointer; border-radius: 8px; padding: 6px 12px; font-weight: 700; font-family: inherit;
+      background: var(--purple-soft); color: var(--purple);
+    }
+    .item.done button { background: var(--green); color: var(--white); }
+
+    /* A progress bar */
+    .bar { background: #eee; border-radius: 999px; height: 14px; overflow: hidden; margin: 10px 0 6px; }
+    .bar-fill { background: linear-gradient(90deg, var(--purple), var(--gold)); height: 100%; width: 0; transition: width 0.5s ease; }
+
+    /* Text inputs inside activities */
+    .field {
+      width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px;
+      font-size: 17px; font-family: inherit; margin-bottom: 10px;
+    }
+    .row { display: flex; gap: 10px; }
+    .row .field { margin-bottom: 0; }
+
+    /* Tips list */
+    .tips { background: var(--purple-soft); border-radius: 10px; padding: 14px 18px; margin-top: 16px; }
+    .tips li { margin: 4px 0; }
+
+    /* A small message line */
+    .msg { color: var(--green); font-weight: 700; min-height: 22px; margin: 8px 0 0; }
+
+    /* ---------- Badges grid (inside its modal) ---------- */
+    .badge-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .badge-box {
+      border: 1px solid #eee; border-radius: 12px; padding: 16px; text-align: center;
+      opacity: 0.4; filter: grayscale(1); transition: all 0.3s ease;
+    }
+    .badge-box.unlocked { opacity: 1; filter: none; border-color: var(--gold); background: #fffbeb; }
+    .badge-icon { display: inline-flex; color: var(--purple); }
+    .badge-icon svg { width: 30px; height: 30px; }
+    .badge-name { font-weight: 700; font-size: 15px; margin-top: 4px; }
+
+    /* ---------- Scroll reveal animation ---------- */
+    /* Elements start slightly down and see-through... */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    /* ...then slide up and fade in when they enter the screen */
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    /* ============================================================
+       DARK MODE: when <body> has the class "dark", override colours
+       ============================================================ */
+    body.dark {
+      --white: #23242b;        /* raised surfaces stay near-black without losing separation */
+      --ink: #f7f7fb;          /* main text light */
+      --grey: #bfc1cc;         /* secondary text stays readable */
+      --purple-soft: #252c3d;  /* muted deep-blue accents */
+      background-color: #15161b;
+    }
+    /* In dark mode, accent TEXT turns a lighter blue so it stays visible
+       (buttons keep the deep navy because they colour the background, not the text) */
+    body.dark .logo-accent,
+    body.dark .section-tag,
+    body.dark .feature-open,
+    body.dark .hero-card-big,
+    body.dark .stat-number,
+    body.dark .activity h4,
+    body.dark .big-number,
+    body.dark .contact-email a,
+    body.dark .btn-back,
+    body.dark .feature-icon,
+    body.dark .menu a:hover { color: #8ab0ff; }
+    body.dark .footer-links a:hover { color: #ffffff; }
+    body.dark .theme-btn { color: #cdd9ff; }   /* keep the moon/sun icon bright in dark mode */
+    body.dark .header { border-bottom-color: #34353e; }
+    body.dark .features { background-color: #1a1b21; }
+    body.dark .feature-card:hover { border-color: #5d6070; }
+    body.dark .feature-card,
+    body.dark .activity,
+    body.dark .step-card,
+    body.dark .item { border-color: #363740; }
+    body.dark .item.done { background-color: #202b24; border-color: #31583c; }
+    body.dark .hero-card-row { border-top-color: #363740; }
+    body.dark .field { background-color: #191a20; color: #f7f7fb; border-color: #40414b; }
+    body.dark .bar { background-color: #383943; }
+    body.dark .footer { background-color: #111216; }
+    body.dark .badge-box { border-color: #34353d; }
+    body.dark .badge-box.unlocked { background-color: #292313; }
+    /* Keep text that sits on purple/dark areas readable (white) in dark mode */
+    body.dark .hero,
+    body.dark .quote,
+    body.dark .footer,
+    body.dark .btn-outline,
+    body.dark .btn-purple { color: #ffffff; }
+    body.dark .btn-gold { color: #15151c; }
+
+    .storage-notice {
+      position: fixed; left: 16px; bottom: 16px; z-index: 100;
+      max-width: min(460px, calc(100vw - 32px)); padding: 12px 16px;
+      border: 1px solid #fed7aa; border-radius: 10px;
+      background: #fff7ed; color: #9a3412; box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      font-size: 15px; line-height: 1.45;
+    }
+    .storage-notice[hidden] { display: none; }
+    body.dark .storage-notice { background: #3a261c; color: #ffca9a; border-color: #854d0e; }
+
+    /* ---------- Big screens: sidebar is always shown, content shifts right ---------- */
+    @media (min-width: 1000px) {
+      .sidebar { transform: translateX(0); }   /* always visible */
+      .app-shell { padding-left: 240px; }       /* push content past the sidebar */
+      .hamburger { display: none; }             /* no need for the menu button */
+      .side-backdrop { display: none !important; }
+    }
+
+    /* ---------- Phone screens ---------- */
+    @media (max-width: 840px) {
+      .menu { display: none; }
+    }
+    @media (min-width: 1000px) and (max-width: 1049px) {
+      .menu { display: none; }
+    }
+
+    @media (max-width: 700px) {
+      .hero-text h1 { font-size: 36px; }
+      .hero-text { text-align: center; min-width: 0; }
+      .hero-card { min-width: 0; width: 100%; }
+      .hero-buttons { justify-content: center; }
+      .feature-grid { grid-template-columns: minmax(0, 1fr); }
+      .row { flex-wrap: wrap; }
+      .row .field { min-width: 0; flex: 1 1 0; }
+      h2 { font-size: 28px; }
+    }
+    @media (max-width: 360px) {
+      .header .container { padding: 0 12px; }
+      .header-inner { gap: 8px; }
+      .logo { gap: 6px; }
+      .logo-name { font-size: 18px; white-space: nowrap; }
+      .hamburger, .theme-btn { flex: 0 0 38px; width: 38px; height: 38px; }
+      .hamburger { margin-right: 0; }
+      .theme-btn { margin-left: 0; }
+    }
